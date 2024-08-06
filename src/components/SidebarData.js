@@ -41,12 +41,12 @@ export const SidebarData = [{
         icon: <IoIcons.IoIosPaper />
       },
       {
-        title: 'All productsList',
-        path: '/products/insightallproductsList',
+        title: 'Search product',
+        path: '/products/searchproduct',
         icon: <IoIcons.IoIosPaper />
       },
       // {
-      //   title: 'ShowProduct',
+      //   title: 'Search product',
       //   path: '/products/product/:productName',
       //   icon: <IoIcons.IoIosPaper />
       // },

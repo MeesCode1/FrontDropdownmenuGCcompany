@@ -34,6 +34,7 @@ import ShowProduct from './pages/products/ShowProduct';
 import Customers from './pages/Customers';
 import ProductsMain from './pages/products/ProductsMain';
 import AddProduct from './pages/products/AddProduct';
+import  SearchProduct from './pages/products/SearchProduct';
 
 function App() {
   return (
@@ -44,7 +45,8 @@ function App() {
         {/* <Route path="/products" element={<Products />} /> */}
         <Route path="/products" element={<ProductsMain />} />
         <Route path="/products/insightallproducts" element={<AllProducts />} />
-        <Route path="/products/product/:productname" element={<ShowProduct />} />
+        <Route path="/products/searchproduct" element={<SearchProduct />} />
+        {/* <Route path="/products/product/:productname" element={<ShowProduct />} /> */}
         <Route path='/products/addproduct' element={<AddProduct />} />
         <Route path="/customers" element={<Customers />} />
       </Routes>

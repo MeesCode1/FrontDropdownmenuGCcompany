@@ -1,11 +1,92 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-import styled from 'styled-components'
+// import React, { useState } from 'react'
+// import { Link } from 'react-router-dom'
+// import styled from 'styled-components'
 
 
-const SidebarLink = styled(Link)`
-display: flex;
-color: #e1e9fc
+// const SidebarLink = styled(Link)`
+// display: flex;
+// color: #e1e9fc
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 20px;
+//   list-style: none;
+//   height: 60px;
+//   text-decoration: none;
+//   font-size: 18px;
+
+//   &:hover {
+//     background: #252831;
+//     border-left: 4px solid #632ce4;
+//     cursor: pointer;
+//   }
+// `;
+
+// const SidebarLabel = styled.span`
+// margin-left: 16px;
+// `;
+
+
+// const DropdownLink = styled(Link)`
+//   background: #414757;
+//   height: 60px;
+//   padding-left: 3rem;
+//   display: flex;
+//   align-items: center;
+//   text-decoration: none;
+//   // color: #f5f5f5; // zakelijk, bijna wit
+//   color: #330066;
+
+//   font-size: 18px;
+
+//   &:hover {
+//     background: #632ce4;
+//     cursor: pointer;
+//   }
+// `;
+
+// const SubMenu = ({ item }) => {
+
+//     const [subnav, setSubnav] = useState(false);
+
+//     const ShowSubnav = () => setSubnav(!subnav);
+
+//   return (
+//     <>
+//       <SidebarLink to={item.path} onClick={item.subNav && ShowSubnav}>
+//         <div>
+//             {item.icon}
+//             <SidebarLabel>{item.title}</SidebarLabel>
+//             </div>
+//             <div>
+//                 {item.subNav && subnav 
+//                 ? item.iconOpened 
+//                 : item.subNav
+//                 ? item.iconClosed
+//                 : null}
+//             </div>
+//             </SidebarLink>
+//             {subnav &&
+//              item.subNav.map((item, index) => {
+//                 return(
+//                     <DropdownLink to={item.path} key={index}>
+//                         {item.icon}
+//                         <SidebarLabel>{item.title}</SidebarLabel>
+//                     </DropdownLink>
+//                 );
+// })}
+//     </>
+//     );
+// };
+
+// export default SubMenu;
+
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
+const SubMenuLink = styled(Link)`
+  display: flex;
+  color: #e1e9fc;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
@@ -21,61 +102,45 @@ color: #e1e9fc
   }
 `;
 
-const SidebarLabel = styled.span`
-margin-left: 16px;
-`;
-
-
-const DropdownLink = styled(Link)`
-  background: #414757;
-  height: 60px;
-  padding-left: 3rem;
+const DropdownIconWrapper = styled.div`
   display: flex;
   align-items: center;
-  text-decoration: none;
-  // color: #f5f5f5; // zakelijk, bijna wit
-  color: #330066;
-
-  font-size: 18px;
-
-  &:hover {
-    background: #632ce4;
-    cursor: pointer;
-  }
+  cursor: pointer;
 `;
 
-const SubMenu = ({ item }) => {
+const SubMenu = ({ item, showSidebar }) => {
+  const [subnav, setSubnav] = useState(false);
 
-    const [subnav, setSubnav] = useState(false);
-
-    const ShowSubnav = () => setSubnav(!subnav);
+  const showSubnav = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // Voorkom dat het klik-event de sidebar sluit
+    setSubnav(!subnav);
+  };
 
   return (
     <>
-      <SidebarLink to={item.path} onClick={item.subNav && ShowSubnav}>
+      <SubMenuLink to={item.path} onClick={!item.subNav ? showSidebar : null} className="submenu-link">
         <div>
-            {item.icon}
-            <SidebarLabel>{item.title}</SidebarLabel>
-            </div>
-            <div>
-                {item.subNav && subnav 
-                ? item.iconOpened 
-                : item.subNav
-                ? item.iconClosed
-                : null}
-            </div>
-            </SidebarLink>
-            {subnav &&
-             item.subNav.map((item, index) => {
-                return(
-                    <DropdownLink to={item.path} key={index}>
-                        {item.icon}
-                        <SidebarLabel>{item.title}</SidebarLabel>
-                    </DropdownLink>
-                );
-})}
+          {item.icon}
+          <span style={{ marginLeft: '16px' }}>{item.title}</span>
+        </div>
+        {item.subNav && (
+          <DropdownIconWrapper onClick={showSubnav}>
+            {subnav ? item.iconOpened : item.iconClosed}
+          </DropdownIconWrapper>
+        )}
+      </SubMenuLink>
+      {subnav &&
+        item.subNav.map((subItem, index) => {
+          return (
+            <SubMenuLink to={subItem.path} key={index} onClick={showSidebar} className="submenu-link">
+              {subItem.icon}
+              <span style={{ marginLeft: '16px' }}>{subItem.title}</span>
+            </SubMenuLink>
+          );
+        })}
     </>
-    );
+  );
 };
 
 export default SubMenu;

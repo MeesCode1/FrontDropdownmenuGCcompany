@@ -1,4 +1,4 @@
-.products {
+/* .products {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
@@ -30,4 +30,38 @@
     padding: 10px;
     margin-top: 10px;
     background-color: #f8f9fa;
+} */
+
+
+/* ---------
+---------
+chatGpt: */
+
+
+.all-products {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+}
+
+.all-products h1 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.product-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.product-table th, .product-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.product-table th {
+    background-color: #f2f2f2;
+    color: #444;
 }
